@@ -2,7 +2,18 @@ import 'package:flutter/material.dart';
 import 'detail_screen.dart';
 import 'add_screen.dart';
 
-class HomeScreen extends StatelessWidget{
+class HomeScreen extends StatefulWidget{
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+class _HomeScreenState extends State<HomeScreen>{
+  final List<String> _books = [];
+
+  void _addBook(String bookTitle){
+    setState(() {
+      _books.add(bookTitle);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,16 +22,15 @@ class HomeScreen extends StatelessWidget{
       ),
       body: Center(
         child: ListView.builder(
-          itemCount: 10,
+          itemCount: _books.length,
           itemBuilder: (context, index){
             return ListTile(
-              title: Text('Book $index'),
-              subtitle: Text('Author $index'),
+              title: Text(_books[index]),
               onTap: (){
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DetailScreen(bookId:index),
+                    builder: (context) => DetailScreen(bookTitle: _books[index]),
                   )
                 );
               },
@@ -30,11 +40,14 @@ class HomeScreen extends StatelessWidget{
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: (){
-          Navigator.push(
+        onPressed: () async {
+          final String? newBookTitle = await Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => AddScreen()),
           );
+          if (newBookTitle != null){
+            _addBook(newBookTitle);
+          }
         },
       )
     );

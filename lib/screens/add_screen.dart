@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AddScreen extends StatelessWidget {
+  final _controller = TextEditingController();
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -13,6 +14,7 @@ class AddScreen extends StatelessWidget {
           child: Column(
             children: <Widget>[
               TextField(
+                controller: _controller,
                 decoration: InputDecoration(
                   labelText: 'Book Title'
                 ),
@@ -24,7 +26,7 @@ class AddScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: (){
-                  Navigator.pop(context);
+                  Navigator.pop(context, _controller.text);
                 },
                 child: Text('Add Book'),
               )
