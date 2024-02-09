@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-
+import '../database_helper.dart';
 class AddScreen extends StatelessWidget {
-  final _controller = TextEditingController();
+  final _titleController = TextEditingController();
+  final _authorController = TextEditingController();
+  final _categoryController = TextEditingController();
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -14,19 +16,32 @@ class AddScreen extends StatelessWidget {
           child: Column(
             children: <Widget>[
               TextField(
-                controller: _controller,
+                controller: _titleController,
                 decoration: InputDecoration(
                   labelText: 'Book Title'
                 ),
               ),
               TextField(
+                controller: _authorController,
                 decoration: InputDecoration(
                   labelText: 'Author'
                 ),
               ),
+              TextField(
+                controller: _categoryController,
+                decoration: InputDecoration(
+                  labelText: 'Category'
+                ),
+              ),
               ElevatedButton(
-                onPressed: (){
-                  Navigator.pop(context, _controller.text);
+                onPressed: () async {
+                  await DatabaseHelper.instance.insert({
+                    DatabaseHelper.columnTitle: _titleController.text,
+                    DatabaseHelper.columnAuthor: _authorController.text,
+                    DatabaseHelper.columnCategory: _categoryController.text,
+                    DatabaseHelper.columnAddedTime: DateTime.now().toString(),
+                  });
+                  Navigator.pop(context);
                 },
                 child: Text('Add Book'),
               )
