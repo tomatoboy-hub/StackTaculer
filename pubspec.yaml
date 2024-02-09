@@ -18,7 +18,6 @@ dependencies:
   sqflite: any
   path_provider: any
   flutter_local_notifications: ^9.1.4
-  # Android用
   android_alarm_manager_plus: ^1.2.0
 
 
