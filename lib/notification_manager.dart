@@ -2,7 +2,7 @@ import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 
 Future<void> scheduleNotification(int id, String title, DateTime scheduledTime) async {
   await AndroidAlarmManager.oneShotAt(
-    scheduledTime.add(Duration(days: 7)), // 追加日時から1週間後
+    scheduledTime.add(Duration(seconds: 20)), // 追加日時から1週間後
     id, // 一意のID
     showNotification, // 通知を表示するコールバック関数
     exact: true,
