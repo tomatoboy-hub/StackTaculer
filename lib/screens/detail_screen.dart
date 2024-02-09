@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class DetailScreen extends StatelessWidget {
-  final  String bookTitle;
+  final  Map<String,dynamic> book;
 
-  DetailScreen ({required this.bookTitle});
+  DetailScreen ({required this.book});
 
   @override
   Widget build (BuildContext context){
@@ -15,7 +15,7 @@ class DetailScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Book $bookTitle is selected.'),
+            Text('Book $book is selected.'),
             ElevatedButton(
               onPressed: (){
                 Navigator.pop(context);

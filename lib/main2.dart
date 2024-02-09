@@ -1,57 +1,60 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart'as http;
-import 'package:xml/xml.dart' as xml;
 import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: FirstPage(),
+      home: MyHomePage(),
     );
   }
 }
-class FirstPage extends StatefulWidget {
+
+class MyHomePage extends StatefulWidget {
   @override
-  _FirstPageState createState() => _FirstPageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
-class _FirstPageState extends State<FirstPage> {
+
+class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _isbnController = TextEditingController();
   String _bookInfo = '';
 
   Future<void> _getBookInfo(String isbn) async {
-    final String apiUrl =
-        'https://iss.ndl.go.jp/api/opensearch?isbn=${Uri.encodeComponent(isbn)}';
+    final String apiUrl = 'https://api.openbd.jp/v1/get?isbn=${Uri.encodeComponent(isbn)}';
 
     try {
       final http.Response response = await http.get(Uri.parse(apiUrl));
 
       if (response.statusCode == 200) {
-        final xml.XmlDocument document = xml.XmlDocument.parse(response.body);
+        final List<dynamic> data = json.decode(response.body);
+        print(data);
 
-        final List<xml.XmlElement> entries =
-        document.findAllElements('item').toList();
+        if (data.isNotEmpty) {
+          final Map<String, dynamic> bookData = data[0];
 
-        if (entries.isNotEmpty) {
-          final String title =
-              entries[0].findElements('title').first.value ?? 'No title';
-          final String author =
-              entries[0].findElements('dc:creator').first.value ?? 'No author';
-
+          // ここでbookDataから必要な情報を抽出し、表示などの処理を行います
+          // 以下は例として、タイトルと著者の取得例です
+          final String title = bookData['summary']['title'] ?? 'No title';
+          final String author = bookData['summary']['author']?? 'No author';
+          String pubdate = bookData['summary']['pubdate']?? 'No pubdate';
+          String pricenum = bookData['onix']['ProductSupply']['SupplyDetail']['Price'][0]['PriceAmount'].toString()?? 'No price';
+          String pricetype = bookData['onix']['ProductSupply']['SupplyDetail']['Price'][0]['CurrencyCode']?? 'No pricetype';
+          String booktype = bookData['summary']['series']?? 'No booktype';
+          if (pubdate.length == 4) {
+            pubdate =pubdate + "年";
+          } else if (pubdate.length == 6) {
+            pubdate =pubdate.substring(0, 4) + "年" + pubdate.substring(4, 6) + "月";
+          } else if (pubdate.length == 8) {
+            pubdate =pubdate.substring(0, 4) + "年" + pubdate.substring(4, 6) + "月" + pubdate.substring(6, 8) + "月";
+          }
+          String price =pricenum+pricetype;
           setState(() {
-            _bookInfo = 'Title: $title\nAuthor: $author';
+            _bookInfo = 'Title: $title\n Author:$author\n pubdate:$pubdate\n price :$price\n booktype :$booktype';
           });
         } else {
           setState(() {
@@ -70,9 +73,6 @@ class _FirstPageState extends State<FirstPage> {
     }
   }
 
-  String nametext='';
-  final List<String> entries = <String>['A', 'B', 'C'];
-  final List<int> colorCodes = <int>[600, 500, 100];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,7 +86,7 @@ class _FirstPageState extends State<FirstPage> {
           children: [
             TextField(
               controller: _isbnController,
-              decoration: InputDecoration(labelText: 'Enter ISBN'),
+              decoration: InputDecoration(labelText: 'Enter ISBN10'),
             ),
             SizedBox(height: 20),
             ElevatedButton(
