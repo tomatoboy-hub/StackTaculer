@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AddScreen extends StatelessWidget {
-  final _controller = TextEditingController();
-  final _controller2 = TextEditingController();
   final _controller3 = TextEditingController();
 
   @override
@@ -17,18 +15,6 @@ class AddScreen extends StatelessWidget {
           child: Column(
             children: <Widget>[
               TextField(
-                controller: _controller,
-                decoration: InputDecoration(
-                  labelText: 'Book Title'
-                ),
-              ),
-              TextField(
-                  controller: _controller2,
-                decoration: InputDecoration(
-                  labelText: 'Author'
-                ),
-              ),
-              TextField(
                 controller: _controller3,
                 decoration: InputDecoration(
                     labelText: 'isbn'
@@ -36,7 +22,7 @@ class AddScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: (){
-                  Navigator.pop(context,  _controller3.text, );
+                  Navigator.pop(context,  _controller3.text );
                 },
                 child: Text('Add Book'),
               )

@@ -24,7 +24,6 @@ class _HomeScreenState extends State<HomeScreen>{
 
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
-        print(data);
 
         if (data.isNotEmpty) {
           final Map<String, dynamic> bookData = data[0];
@@ -55,7 +54,13 @@ class _HomeScreenState extends State<HomeScreen>{
       }
     } catch (e) {
       setState(() {
-        book = {'Title': 'error','Author':'error','pubdate':'error' ,'price':'error' ,'booktype' :'error'};
+        book = {
+          'Title': 'error',
+          'Author': 'error',
+          'pubdate': 'error',
+          'price': 'error',
+          'booktype': 'error'
+        };
       });
     }
   }
@@ -70,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen>{
           itemCount: _books.length,
           itemBuilder: (context, index){
             return ListTile(
-              title: Text(_books[index]["title"]),
+              title: Text(_books[index]["Title"]),
               onTap: (){
                 Navigator.push(
                   context,
@@ -90,9 +95,11 @@ class _HomeScreenState extends State<HomeScreen>{
             context,
             MaterialPageRoute(builder: (context) => AddScreen()),
           );
+          print(isbn);
           if (isbn != null){
-            _getBookInfo(isbn);
-            _addBook(book);
+            await _getBookInfo(isbn);
+            _addBook(book);//addbook機能してない理由不明
+            print(_books);
           }
         },
       )
