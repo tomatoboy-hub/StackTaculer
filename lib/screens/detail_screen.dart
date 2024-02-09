@@ -3,8 +3,8 @@ import '../book.dart'; // Bookクラスを定義したファイル
 
 class DetailScreen extends StatelessWidget {
   final Book book;
-
-  const DetailScreen({Key? key, required this.book}) : super(key: key);
+  final VoidCallback onDelete; // onDeleteプロパティを追加
+  const DetailScreen({Key? key, required this.book, required this.onDelete}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +28,11 @@ class DetailScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: onDelete, // 削除ボタン
+        tooltip: 'Delete',
+        child: Icon(Icons.delete),
       ),
     );
   }

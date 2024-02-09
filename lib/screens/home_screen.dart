@@ -47,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Map<String, dynamic> item = snapshot.data![index];
               // Bookオブジェクトの作成
               Book book = Book(
+                id: item[DatabaseHelper.columnId],
                 title: item[DatabaseHelper.columnTitle],
                 author: item[DatabaseHelper.columnAuthor],
                 category: item[DatabaseHelper.columnCategory],
@@ -55,15 +56,30 @@ class _HomeScreenState extends State<HomeScreen> {
               return ListTile(
                 title: Text(book.title),
                 subtitle: Text(book.author),
-                onTap: () {
+                onTap: () async {
                   // DetailScreenにBookオブジェクトを渡す
-                  Navigator.push(
+                  bool result = await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DetailScreen(book: book),
+                      builder: (context) => DetailScreen(book: book,onDelete: () async {
+                        await DatabaseHelper.instance.delete(book.id);
+                        Navigator.pop(context, true); // 削除後にtrueを返す
+                      }),
                     ),
                   );
+                  if (result == true) {
+                    setState(() {});
+                  }
                 },
+                trailing: IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () async {
+                    // データベースからアイテムを削除
+                    await DatabaseHelper.instance.delete(book.id); // 仮定: `Book`クラスに`id`フィールドが存在し、それがデータベースの主キーに対応している
+                    // UIを更新
+                    setState(() {});
+                  },
+                ),
               );
             },
           );
