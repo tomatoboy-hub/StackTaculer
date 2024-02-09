@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './scan_screen.dart';
 import '../database_helper.dart';
 class AddScreen extends StatelessWidget {
   final _titleController = TextEditingController();
@@ -49,7 +50,15 @@ class AddScreen extends StatelessWidget {
           )
         )
       )
-
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.camera_alt), // Changed from 'add' to 'camera_alt'
+        onPressed: () async {
+          final String? newBookTitle = await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SecondScreen()),
+          );
+        },
+      ),
     );
 
   }
