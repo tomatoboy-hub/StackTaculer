@@ -1,7 +1,7 @@
-// second_screen.dart
 import 'package:flutter/material.dart';
 import 'package:barcode_scan2/platform_wrapper.dart';
 import 'package:flutter/services.dart';
+
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -19,8 +19,8 @@ class _SecondScreenState extends State<SecondScreen> {
         readData = scan.rawContent;
         typeData = scan.format.name;
       });
-      print('Read Data: $readData'); // ログに読み込んだデータを出力
-      print('Type Data: $typeData'); // ログに読み込んだデータのタイプを出力
+      print('Read Data: $readData');
+      print('Type Data: $typeData');
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.cameraAccessDenied) {
         setState(() {

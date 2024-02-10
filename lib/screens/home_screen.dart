@@ -36,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: DatabaseHelper.instance.queryAllRows(),
         builder: (BuildContext context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+
           if (snapshot.hasData) {
             // 本の数を更新
             _booksCount = snapshot.data!.length;
@@ -47,11 +48,12 @@ class _HomeScreenState extends State<HomeScreen> {
               Map<String, dynamic> item = snapshot.data![index];
               // Bookオブジェクトの作成
               Book book = Book(
-                id: item[DatabaseHelper.columnId],
-                title: item[DatabaseHelper.columnTitle],
-                author: item[DatabaseHelper.columnAuthor],
-                category: item[DatabaseHelper.columnCategory],
-                addedTime: item[DatabaseHelper.columnAddedTime],
+                id: item[DatabaseHelper.columnId] as int,
+                title: item[DatabaseHelper.columnTitle] as String,
+                author: item[DatabaseHelper.columnAuthor] as String,
+                category: item[DatabaseHelper.columnCategory] as String,
+                price : item[DatabaseHelper.columnPrice] as String,
+                addedTime: item[DatabaseHelper.columnAddedTime] as String,
               );
               return ListTile(
                 title: Text(book.title),
