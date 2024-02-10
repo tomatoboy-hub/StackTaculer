@@ -46,6 +46,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/book.obj
+    - assets/book.mtl
     - assets/book2.obj
     - assets/test.png
 
