@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'screens/setting.dart';
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 FlutterLocalNotificationsPlugin();
 
@@ -19,9 +20,7 @@ class StacktacularApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'StackTaculer',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: MyApp.currentTheme,
       home: HomeScreen(),
     );
   }
