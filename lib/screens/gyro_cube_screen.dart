@@ -81,12 +81,13 @@ class _GyroCubeScreenState extends State<GyroCubeScreen> {
       // 経度と緯度をランダムに選択
       final theta = math.Random().nextDouble() * 2 * math.pi; // 0 から 2π
       final phi = math.acos(2 * math.Random().nextDouble() - 1); // -1 から 1 の値をacosに通すことで、0 から π の範囲に
-
+      final rng = math.Random(); // 乱数生成器
       // 球面座標系から直交座標系への変換
       final x = center.x + radius * math.sin(phi) * math.cos(theta);
       final y = center.y + radius * math.sin(phi) * math.sin(theta);
       final z = center.z + radius * math.cos(phi);
-      var bookObject = Object(fileName: 'assets/book.obj');
+      final fileName = rng.nextBool() ? 'assets/book.obj' : 'assets/Magic_Book.obj';
+      var bookObject = Object(fileName: fileName);
       bookObject.rotation.setValues(0, -theta, 0); // オブジェクトが中心を向くように調
       bookObject.position.setValues(x, y, z);
       bookObject.updateTransform();
