@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../main.dart';
+import '../screens/setting.dart';
 
 class Footer extends StatefulWidget {
   @override
@@ -51,7 +52,7 @@ class _Footer extends State<Footer> {
             break;
           case 2:
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => StacktacularApp()));
+                context, MaterialPageRoute(builder: (context) => MyApp()));
 
             break;
         }

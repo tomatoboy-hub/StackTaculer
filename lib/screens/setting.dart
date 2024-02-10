@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../common/Footer.dart';
 
 void main() {
   runApp(MyApp());
@@ -87,6 +88,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: Footer(),
     );
   }
 
