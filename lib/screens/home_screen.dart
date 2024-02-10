@@ -4,6 +4,7 @@ import 'add_screen.dart';
 import 'gyro_cube_screen.dart';
 import 'package:stacktaculer/database_helper.dart';
 import '../book.dart';
+import '../common/Footer.dart';
 
 class HomeScreen extends StatefulWidget{
   @override
@@ -98,6 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {}); // FutureBuilderを再実行してリストを更新
         },
       ),
+      bottomNavigationBar: Footer(),
     );
   }
 }
