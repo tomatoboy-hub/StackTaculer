@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:barcode_scan2/platform_wrapper.dart';
 import 'package:flutter/services.dart';
 import '../common/Footer.dart';
+import '../notification_manager.dart';
 
 class AddScreen extends StatefulWidget {
   @override
@@ -81,6 +82,7 @@ class _AddScreenState extends State<AddScreen>  {
       DatabaseHelper.columnAddedTime: DateTime.now().toString(),
       // その他のカラムに対応するデータを追加
     });
+    scheduleNotification();
     Navigator.pop(context); // データ追加後に前の画面に戻る
   }
 
