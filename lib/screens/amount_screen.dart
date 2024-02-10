@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../database_helper.dart';
+import 'package:fl_chart/fl_chart.dart';
 import '../common/Footer.dart';
 
 class AmountScreen extends StatefulWidget {
@@ -60,6 +61,66 @@ class _AmountScreenState extends State<AmountScreen> {
                 } else if (snapshot.hasError) {
                   return Text("${snapshot.error}");
                 }
+                return CircularProgressIndicator();
+              },
+            ),
+            FutureBuilder<List<Map<String, dynamic>>>(
+              future: _monthlyAmounts,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final List<BarChartGroupData> barGroups = [];
+                  // snapshot.dataから棒グラフのデータを生成
+                  for (var i = 0; i < snapshot.data!.length; i++) {
+                    final monthData = snapshot.data![i];
+                    final month = monthData['month']; // 月（表示用）
+                    final total = monthData['monthlyTotal']; // その月の合計金額
+
+                    final barGroup = BarChartGroupData(
+                      x: i,
+                      barRods: [
+                        BarChartRodData(
+                          y: total.toDouble(),
+                          colors: [Colors.lightBlueAccent, Colors.greenAccent],
+                        ),
+                      ],
+                      showingTooltipIndicators: [0],
+                    );
+
+                    barGroups.add(barGroup);
+                  }
+
+                  final barChartData = BarChartData(
+                    barGroups: barGroups,
+                    titlesData: FlTitlesData(
+                      show: true,
+                      bottomTitles: SideTitles(
+                        showTitles: true,
+                        getTextStyles: (context, value) => const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                        margin: 16,
+                        getTitles: (double value) {
+                          // 月の名前を返すロジック
+                          return snapshot.data![value.toInt()]['month'];
+                        },
+                      ),
+                    ),
+                    borderData: FlBorderData(show: false),
+                  );
+
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 200.0, // 明確な高さを指定
+                      child: BarChart(barChartData),
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
+                // ロード中はインジケーターを表示
                 return CircularProgressIndicator();
               },
             ),

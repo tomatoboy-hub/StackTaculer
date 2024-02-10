@@ -26,6 +26,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   barcode_scan2: any
+  fl_chart: ^0.40.0
 
 
 dev_dependencies:
@@ -46,6 +47,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/book.obj
+    - assets/book.mtl
     - assets/book2.obj
     - assets/test.png
 
