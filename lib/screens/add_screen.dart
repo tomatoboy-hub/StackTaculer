@@ -30,6 +30,9 @@ class _AddScreenState extends State<AddScreen>  {
     setState(() {
       _isbn = result.rawContent; // スキャン結果を状態変数に保存
     });
+    if (_isbn.isNotEmpty) {
+      _fetchBookInfo(_isbn); // スキャン後自動で書籍情報をフェッチ
+    }
   }
   // スキャンしたISBNで書籍情報を取得するメソッド
   Future<void> _fetchBookInfo(String isbn) async {
@@ -85,7 +88,58 @@ class _AddScreenState extends State<AddScreen>  {
     scheduleNotification();
     Navigator.pop(context); // データ追加後に前の画面に戻る
   }
+// ISBN入力フィールド
+  Widget _isbnInputField() {
+    return TextField(
+      controller: _isbnController,
+      decoration: InputDecoration(
+        labelText: 'ISBN Code',
+        hintText: 'Enter ISBN manually or scan',
+      ),
+      onChanged: (value) {
+        setState(() {
+          _isbn = value.trim(); // ユーザーが手動でISBNを入力した場合
+        });
+      },
+    );
+  }
 
+  // ボタン群
+  Widget _actionButtons() {
+    return Column(
+      children: <Widget>[
+        ElevatedButton(
+          onPressed: () {
+            final isbn = _isbnController.text.trim();
+            if (isbn.isNotEmpty) {
+              _fetchBookInfo(isbn);
+            }
+          },
+          child: Text('Fetch Book Info'),
+        ),
+      ],
+    );
+  }
+
+  // 書籍情報表示
+  Widget _bookInfo() {
+    if (book.isNotEmpty) {
+      return Column(
+        children: <Widget>[
+          Text('Title: ${book['title']}'),
+          Text('Author: ${book['author']}'),
+          Text('Price: ${book['price']}'),
+          Text('Series: ${book['series']}'),
+          ElevatedButton(
+            onPressed: _addBookToDatabase,
+            child: Text('Add to Database'),
+          ),
+        ],
+      );
+    } else {
+      return Container(); // 書籍情報がない場合は何も表示しない
+    }
+  }
 
   @override
   Widget build(BuildContext context){
@@ -99,44 +153,10 @@ class _AddScreenState extends State<AddScreen>  {
           child: Column(
             children: <Widget>[
               if (_isLoading) CircularProgressIndicator(),
-              TextField(
-                controller: _isbnController,
-                decoration: InputDecoration(
-                  labelText: 'ISBN Code',
-                  hintText: 'Enter ISBN manually or scan',
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  final isbn = _isbnController.text.trim();
-                  if (isbn.isNotEmpty) {
-                    _fetchBookInfo(isbn);
-                  }
-                },
-                child: Text('Fetch Book Info'),
-              ),
-              ElevatedButton(
-                onPressed: _scanISBN,
-                child: Text('Scan ISBN'),
-              ),
+              _isbnInputField(),
+              _actionButtons(),
               if (_isbn.isNotEmpty) Text('Scanned ISBN: $_isbn'),
-              ElevatedButton(
-                onPressed: _isbn.isNotEmpty ? () =>  _fetchBookInfo(_isbn) : null,
-                child: Text('Fetch Book Info'),
-              ),
-
-              if (book.isNotEmpty) ...[
-                Text('Title: ${book['title']}'),
-                Text('Author: ${book['author']}'),
-                Text('Price: ${book['price']}'),
-                Text('Series: ${book['series']}'),
-                ElevatedButton(
-                  onPressed: _addBookToDatabase,
-                  child: Text('Add to Database'),
-                ),
-
-
-              ],
+              _bookInfo(),
               ElevatedButton(
                 onPressed: () async {
                   await DatabaseHelper.instance.resetDatabase();
@@ -154,6 +174,11 @@ class _AddScreenState extends State<AddScreen>  {
             ]
           )
         )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _scanISBN,
+        tooltip: 'Scan ISBN',
+        child: Icon(Icons.camera_alt),
       ),
       bottomNavigationBar: Footer(),
     );

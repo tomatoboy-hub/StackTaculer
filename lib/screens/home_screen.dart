@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.pop(context, true); // 削除後にtrueを返す
                         }),
                       ),
-                    );
+                    )?? false;
                     if (result == true) {
                       setState(() {});
                     }
@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     icon: Icon(Icons.delete,color: Color(0xFF401b13),),
                     onPressed: () async {
                       // データベースからアイテムを削除
-                      await DatabaseHelper.instance.delete(book.id); // 仮定: `Book`クラスに`id`フィールドが存在し、それがデータベースの主キーに対応している
+                      await DatabaseHelper.instance.delete(book.id);
                       // UIを更新
                       setState(() {});
                     },
