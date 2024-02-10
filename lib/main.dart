@@ -20,7 +20,7 @@ class StacktacularApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'StackTaculer',
-      theme: MyApp.currentTheme,
+      theme: MeApp.currentTheme,
       home: HomeScreen(),
     );
   }

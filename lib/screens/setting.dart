@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MeApp());
 }
 
-class MyApp extends StatelessWidget {
+class MeApp extends StatelessWidget {
   static ThemeData currentTheme = ThemeData.light();
   static double currentFontSize = 12.0;
 
@@ -42,7 +42,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: Text(
           'Settings',
-          style: TextStyle(fontSize: MyApp.currentFontSize),
+          style: TextStyle(fontSize: MeApp.currentFontSize),
         ),
       ),
       body: Padding(
@@ -79,7 +79,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             Text(
               'サンプルテキスト',
-              style: TextStyle(fontSize: MyApp.currentFontSize),
+              style: TextStyle(fontSize: MeApp.currentFontSize),
             ),
           ],
         ),
@@ -89,15 +89,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   void setThemeMode(bool value) {
     if (value) {
-      MyApp.setThemeData(ThemeData.dark());
+      MeApp.setThemeData(ThemeData.dark());
     } else {
-      MyApp.setThemeData(ThemeData.light());
+      MeApp.setThemeData(ThemeData.light());
     }
   }
 
   void setFontSize() {
     double fontSize = getFontSize(selectedOption);
-    MyApp.setFontSize(fontSize);
+    MeApp.setFontSize(fontSize);
   }
 
   double getFontSize(String selectedOption) {
@@ -113,7 +113,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 }
-extension ThemeExtension on MyApp {
+extension ThemeExtension on MeApp {
   setThemeData(ThemeData themeData) {
     runApp(
       MaterialApp(

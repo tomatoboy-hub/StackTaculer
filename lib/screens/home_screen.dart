@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
               return ListTile(
                 title: Text(book.title,
-                  style: TextStyle(fontSize: MyApp.currentFontSize),
+                  style: TextStyle(fontSize: MeApp.currentFontSize),
                 ),
                 subtitle: Text(book.author),
                 onTap: () async {
