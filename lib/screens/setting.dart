@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../common/Footer.dart';
-
+import '../database_helper.dart';
 void main() {
   runApp(MyApp());
 }
@@ -85,11 +85,52 @@ class _SettingsScreenState extends State<SettingsScreen> {
               'サンプルテキスト',
               style: TextStyle(fontSize: getFontSize(selectedOption)),
             ),
+            ElevatedButton(
+              onPressed: () => _showDeleteConfirmationDialog(context),
+              child: Text('データベース削除'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red,// ボタンの背景色を赤に
+                onPrimary: Colors.white,
+              ),
+            ),
           ],
         ),
       ),
       bottomNavigationBar: Footer(),
     );
+  }
+  void _showDeleteConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('確認'),
+          content: Text('データベースを削除してもよろしいですか？'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('キャンセル'),
+              onPressed: () {
+                Navigator.of(context).pop(); // ダイアログを閉じる
+              },
+            ),
+            TextButton(
+              child: Text('OK'),
+              onPressed: () async {
+                Navigator.of(context).pop(); // ダイアログを閉じる
+                await _resetDatabase(); // データベース削除処理
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+  Future<void> _resetDatabase() async {
+    // DatabaseHelperを使ってデータベース削除処理を実装
+    await DatabaseHelper.instance.resetDatabase();
+    // 削除完了後の処理（任意でSnackBar表示など）
+    final snackBar = SnackBar(content: Text('データベースを削除しました。'));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   void setThemeMode(bool value) {
@@ -115,3 +156,4 @@ extension ThemeExtension on MyApp {
     );
   }
 }
+

@@ -157,20 +157,6 @@ class _AddScreenState extends State<AddScreen>  {
               _actionButtons(),
               if (_isbn.isNotEmpty) Text('Scanned ISBN: $_isbn'),
               _bookInfo(),
-              ElevatedButton(
-                onPressed: () async {
-                  await DatabaseHelper.instance.resetDatabase();
-                  final snackBar = SnackBar(
-                    content: Text('Database has been reset.'),
-                    backgroundColor: Colors.red,
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                },
-                child: Text('Reset Database'),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.red, // ボタンの背景色
-                ),
-              ),
             ]
           )
         )
