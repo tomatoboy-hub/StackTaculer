@@ -5,6 +5,7 @@ import 'gyro_cube_screen.dart';
 import 'package:stacktaculer/database_helper.dart';
 import '../book.dart';
 import '../common/Footer.dart';
+import './amount_screen.dart';
 
 class HomeScreen extends StatefulWidget{
   @override
@@ -30,6 +31,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               }
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.account_balance_wallet), // アイコンを選択
+            onPressed: () {
+              // AmountScreen に遷移する
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AmountScreen()),
+              );
             },
           ),
         ],
