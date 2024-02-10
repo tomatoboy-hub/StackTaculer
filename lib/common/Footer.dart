@@ -33,6 +33,8 @@ class _Footer extends State<Footer> {
           label: '設定',
         ),
       ],
+      backgroundColor: Color(0xFF4d5d73),
+      selectedItemColor: Color(0xFFbdd9f2),
       currentIndex: _currentIndex,
       onTap: (index) {
         setState(() {

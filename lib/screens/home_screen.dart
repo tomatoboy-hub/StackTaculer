@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('StackTaculer'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.threed_rotation,color: Color(0xFFbf7449),),
+            icon: Icon(Icons.threed_rotation),
             onPressed: () {
               if (_booksCount > 0) { // 本の数が0より大きい場合のみ遷移
                 Navigator.push(
@@ -44,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
           }
           if (!snapshot.hasData) return CircularProgressIndicator();
           return ListView.builder(
+            padding: EdgeInsets.all(15),
             itemCount: snapshot.data!.length,
             itemBuilder: (BuildContext context, int index) {
               Map<String, dynamic> item = snapshot.data![index];
@@ -56,35 +57,43 @@ class _HomeScreenState extends State<HomeScreen> {
                 price : item[DatabaseHelper.columnPrice] as String,
                 addedTime: item[DatabaseHelper.columnAddedTime] as String,
               );
-              return ListTile(
-                title: Text(book.title,
-                style: TextStyle(
-                  fontSize: 15
-                ),),
-                subtitle: Text(book.author),
-                onTap: () async {
-                  // DetailScreenにBookオブジェクトを渡す
-                  bool result = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DetailScreen(book: book,onDelete: () async {
-                        await DatabaseHelper.instance.delete(book.id);
-                        Navigator.pop(context, true); // 削除後にtrueを返す
-                      }),
-                    ),
-                  );
-                  if (result == true) {
-                    setState(() {});
-                  }
-                },
-                trailing: IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () async {
-                    // データベースからアイテムを削除
-                    await DatabaseHelper.instance.delete(book.id); // 仮定: `Book`クラスに`id`フィールドが存在し、それがデータベースの主キーに対応している
-                    // UIを更新
-                    setState(() {});
+              return Card(
+                margin: const EdgeInsets.only(bottom: 10.0),
+                elevation: 8,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)
+                ),
+                child: ListTile(
+                  title: Text(book.title),
+                  subtitle: Text(book.author),
+                  onTap: () async {
+                    // DetailScreenにBookオブジェクトを渡す
+                    bool result = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailScreen(book: book,onDelete: () async {
+                          await DatabaseHelper.instance.delete(book.id);
+                          Navigator.pop(context, true); // 削除後にtrueを返す
+                        }),
+                      ),
+                    );
+                    if (result == true) {
+                      setState(() {});
+                    }
                   },
+                  tileColor: Color(0xFFf2f2f2),
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete,color: Color(0xFF401b13),),
+                    onPressed: () async {
+                      // データベースからアイテムを削除
+                      await DatabaseHelper.instance.delete(book.id); // 仮定: `Book`クラスに`id`フィールドが存在し、それがデータベースの主キーに対応している
+                      // UIを更新
+                      setState(() {});
+                    },
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30))
+                  ),
                 ),
               );
             },
@@ -92,8 +101,8 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xFF4d5d73),
-        child: Icon(Icons.add,color: Color(0xFFbdd9f2),),
+        backgroundColor: Color(0xFFbf7449),
+        child: Icon(Icons.add,color: Color(0xFF401b13),),
         onPressed: () async {
           // 書籍追加画面から戻った後、リストを更新する
           await Navigator.push(

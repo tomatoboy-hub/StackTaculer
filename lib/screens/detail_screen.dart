@@ -11,33 +11,86 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF4D5D73),
-        title: Text(book.title,
-        style: TextStyle(
-          color: Color(0xFFBDD9F2)
-        ),),
+        title: Text(book.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('Title: ${book.title}'),
-            Text('Author: ${book.author}'),
-            Text('Category: ${book.category}'),
-            Text('Added on: ${book.addedTime}'),
+        child: Container(
+          alignment: Alignment.topLeft,
+          margin: EdgeInsets.all(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(top: 10.0),
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide()
+                    )
+                ),
+                child: Text('Title', style: TextStyle(fontSize: 15),),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 5.0),
+                child: Text(book.title, style:  TextStyle(fontSize: 20),),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 10.0),
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide()
+                    )
+                ),
+                child: Text('Author', style: TextStyle(fontSize: 15),),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 5.0),
+                child: Text(book.author, style:  TextStyle(fontSize: 20),),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 10.0),
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide()
+                    )
+                ),
+                child: Text('Category', style: TextStyle(fontSize: 15),),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 5.0),
+                child: Text(book.category, style:  TextStyle(fontSize: 20),),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 10.0),
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide()
+                    )
+                ),
+                child: Text('Added on', style: TextStyle(fontSize: 15),),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 5.0),
+                child: Text(book.addedTime, style:  TextStyle(fontSize: 20),),
+              ),
+
+              /*
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
               child: Text('Go back'),
             ),
-          ],
+             */
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xFFbf7449),
         onPressed: onDelete, // 削除ボタン
         tooltip: 'Delete',
-        child: Icon(Icons.delete),
+        child: Icon(Icons.delete,color: Color(0xFF401b13),),
       ),
       bottomNavigationBar: Footer(),
     );

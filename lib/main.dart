@@ -22,12 +22,13 @@ class StacktacularApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         appBarTheme: AppBarTheme(
+            iconTheme: IconThemeData(color: Color(0xFFf2f2f2)),
           color: Color(0xFF4d5d73),
           titleTextStyle: TextStyle(
             color: Color(0xFFbdd9f2),
             fontSize: 24
           )
-        )
+        ),
       ),
       home: HomeScreen(),
     );
