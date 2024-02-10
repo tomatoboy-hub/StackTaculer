@@ -40,7 +40,14 @@ class _GyroCubeScreenState extends State<GyroCubeScreen> {
       appBar: AppBar(
         title: Text('Book Universe'),
       ),
-      body: Column(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/space.jpeg'),
+            fit: BoxFit.cover, // 画面全体にフィットさせる
+          ),
+        ),
+       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
@@ -61,7 +68,9 @@ class _GyroCubeScreenState extends State<GyroCubeScreen> {
           ],
         ],
       ),
+      ),
       bottomNavigationBar: Footer(),
+
     );
   }
   void _onSceneCreated(Scene scene) {

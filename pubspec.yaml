@@ -50,6 +50,7 @@ flutter:
     - assets/book.mtl
     - assets/book2.obj
     - assets/test.png
+    - assets/space.jpeg
 
 
   # The following line ensures that the Material Icons font is
