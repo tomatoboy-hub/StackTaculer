@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stacktaculer/screens/setting.dart';
 import 'detail_screen.dart';
 import 'add_screen.dart';
 import 'gyro_cube_screen.dart';
@@ -57,7 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 addedTime: item[DatabaseHelper.columnAddedTime] as String,
               );
               return ListTile(
-                title: Text(book.title),
+                title: Text(book.title,
+                  style: TextStyle(fontSize: MyApp.currentFontSize),
+                ),
                 subtitle: Text(book.author),
                 onTap: () async {
                   // DetailScreenにBookオブジェクトを渡す
