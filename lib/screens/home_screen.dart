@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('StackTaculer'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.threed_rotation),
+            icon: Icon(Icons.threed_rotation,color: Color(0xFFbf7449),),
             onPressed: () {
               if (_booksCount > 0) { // 本の数が0より大きい場合のみ遷移
                 Navigator.push(
@@ -57,7 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 addedTime: item[DatabaseHelper.columnAddedTime] as String,
               );
               return ListTile(
-                title: Text(book.title),
+                title: Text(book.title,
+                style: TextStyle(
+                  fontSize: 15
+                ),),
                 subtitle: Text(book.author),
                 onTap: () async {
                   // DetailScreenにBookオブジェクトを渡す
@@ -89,7 +92,8 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        backgroundColor: Color(0xFF4d5d73),
+        child: Icon(Icons.add,color: Color(0xFFbdd9f2),),
         onPressed: () async {
           // 書籍追加画面から戻った後、リストを更新する
           await Navigator.push(

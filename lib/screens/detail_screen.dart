@@ -11,7 +11,11 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Book Detail'),
+        backgroundColor: Color(0xFF4D5D73),
+        title: Text(book.title,
+        style: TextStyle(
+          color: Color(0xFFBDD9F2)
+        ),),
       ),
       body: Center(
         child: Column(

@@ -21,6 +21,13 @@ class StacktacularApp extends StatelessWidget {
       title: 'StackTaculer',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        appBarTheme: AppBarTheme(
+          color: Color(0xFF4d5d73),
+          titleTextStyle: TextStyle(
+            color: Color(0xFFbdd9f2),
+            fontSize: 24
+          )
+        )
       ),
       home: HomeScreen(),
     );
