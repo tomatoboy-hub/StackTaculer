@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../book.dart'; // Bookクラスを定義したファイル
+import '../common/Footer.dart';
 
 class DetailScreen extends StatelessWidget {
   final Book book;
@@ -34,6 +35,7 @@ class DetailScreen extends StatelessWidget {
         tooltip: 'Delete',
         child: Icon(Icons.delete),
       ),
+      bottomNavigationBar: Footer(),
     );
   }
 }

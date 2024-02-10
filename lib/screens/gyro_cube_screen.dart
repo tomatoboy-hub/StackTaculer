@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
 import 'package:sensors/sensors.dart';
 import 'dart:async';
+import '../common/Footer.dart';
 
 class GyroCubeScreen extends StatefulWidget {
   final int booksCount;
@@ -44,6 +45,7 @@ class _GyroCubeScreenState extends State<GyroCubeScreen> {
           ),
         ],
       ),
+      bottomNavigationBar: Footer(),
     );
   }
   void _onSceneCreated(Scene scene) {

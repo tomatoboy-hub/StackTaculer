@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:barcode_scan2/platform_wrapper.dart';
 import 'package:flutter/services.dart';
+import '../common/Footer.dart';
 
 class AddScreen extends StatefulWidget {
   @override
@@ -152,7 +153,7 @@ class _AddScreenState extends State<AddScreen>  {
           )
         )
       ),
-
+      bottomNavigationBar: Footer(),
     );
 
   }

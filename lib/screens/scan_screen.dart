@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:barcode_scan2/platform_wrapper.dart';
 import 'package:flutter/services.dart';
-
+import '../common/Footer.dart';
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -46,6 +46,7 @@ class _SecondScreenState extends State<SecondScreen> {
           child: Text('バーコードを読み込む'),
         ),
       ),
+      bottomNavigationBar: Footer(),
     );
   }
 }
