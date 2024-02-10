@@ -82,5 +82,32 @@ class DatabaseHelper {
     // データベースを再初期化
     await database;
   }
+  Future<double> getTotalAmount() async {
+    Database db = await database;
+    // CASTを使ってTEXT型のpriceをREALに変換
+    String sql = 'SELECT SUM(CAST(price AS REAL)) as total FROM books';
+    var result = await db.rawQuery(sql);
+    double total = result[0]['total'] != null ? (result[0]['total'] as num).toDouble() : 0.0;
+    return total;
+  }
+
+  Future<List<Map<String, dynamic>>> getMonthlyAmount() async {
+    Database db = await database;
+    String sql = '''
+  SELECT
+    strftime('%Y-%m', addedTime) as month,
+    SUM(CAST(price AS REAL)) as monthlyTotal
+  FROM
+    books
+  GROUP BY
+    month
+  ORDER BY
+    month DESC
+  ''';
+    var result = await db.rawQuery(sql);
+    return result;
+  }
+
+
 
 }
