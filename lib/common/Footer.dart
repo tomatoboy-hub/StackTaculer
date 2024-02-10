@@ -11,7 +11,7 @@ class _Footer extends State<Footer> {
 
   final List<Widget> _pages = [
     HomeScreen(), // ホーム画面
-    AmountScreen(), // 金額表示画面
+    AmountsScreen(), // 金額表示画面
     SettingsScreen(), // 設定画面
   ];
 
@@ -46,7 +46,7 @@ class _Footer extends State<Footer> {
             break;
           case 1:
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => AmountScreen()));
+                context, MaterialPageRoute(builder: (context) => AmountsScreen()));
 
             break;
           case 2:
@@ -69,7 +69,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class AmountScreen extends StatelessWidget {
+class AmountsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
