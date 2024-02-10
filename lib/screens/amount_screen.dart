@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../database_helper.dart';
+import '../common/Footer.dart';
 
 class AmountScreen extends StatefulWidget {
   @override
@@ -65,6 +66,7 @@ class _AmountScreenState extends State<AmountScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: Footer(),
     );
   }
 }
