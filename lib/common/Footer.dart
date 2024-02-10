@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../main.dart';
 import '../screens/setting.dart';
-
 class Footer extends StatefulWidget {
   @override
   _Footer createState() => _Footer();
@@ -47,7 +46,7 @@ class _Footer extends State<Footer> {
             break;
           case 1:
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => StacktacularApp()));
+                context, MaterialPageRoute(builder: (context) => AmountScreen()));
 
             break;
           case 2:
