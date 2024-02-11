@@ -26,6 +26,13 @@ class StacktacularApp extends StatelessWidget {
     return MaterialApp(
       title: 'StackTaculer',
       theme: ThemeData(
+        elevatedButtonTheme: ElevatedButtonThemeData(
+        ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Color(0xFFbf7449),
+
+          //splashColor: Color(0xFF401b13)
+        ),
         primarySwatch: Colors.blue,
         appBarTheme: AppBarTheme(
             iconTheme: IconThemeData(color: Color(0xFFf2f2f2)),
@@ -34,6 +41,22 @@ class StacktacularApp extends StatelessWidget {
             color: Color(0xFFbdd9f2),
             fontSize: 24
           )
+        ),
+        cardTheme: CardTheme(
+          color: Color(0xFFf2f2f2)
+        )
+      ),
+      darkTheme: ThemeData(
+        appBarTheme: AppBarTheme(
+          iconTheme: IconThemeData(
+            color: Color(0xFFf2f2f2)
+          ),
+          titleTextStyle: TextStyle(
+            color: Color(0xFF4d5d73)
+          )
+        ),
+        cardTheme: CardTheme(
+          color: Color(0xFF0d0d0d)
         ),
       ),
       home: HomeScreen(),
