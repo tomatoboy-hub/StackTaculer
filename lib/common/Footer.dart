@@ -54,7 +54,7 @@ class _Footer extends State<Footer> {
             break;
           case 2:
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MyApp()));
+                context, MaterialPageRoute(builder: (context) => MeApp()));
 
             break;
         }
