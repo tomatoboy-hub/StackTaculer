@@ -7,6 +7,7 @@ import 'package:barcode_scan2/platform_wrapper.dart';
 import 'package:flutter/services.dart';
 import '../common/Footer.dart';
 import '../notification_manager.dart';
+import '../screens/setting.dart';
 
 class AddScreen extends StatefulWidget {
   @override
@@ -108,14 +109,17 @@ class _AddScreenState extends State<AddScreen>  {
   Widget _actionButtons() {
     return Column(
       children: <Widget>[
-        ElevatedButton(
-          onPressed: () {
-            final isbn = _isbnController.text.trim();
-            if (isbn.isNotEmpty) {
-              _fetchBookInfo(isbn);
-            }
-          },
-          child: Text('Fetch Book Info'),
+        Container(
+          margin: EdgeInsets.only(top: 10.0),
+          child: ElevatedButton(
+            onPressed: () {
+              final isbn = _isbnController.text.trim();
+              if (isbn.isNotEmpty) {
+                _fetchBookInfo(isbn);
+              }
+            },
+            child: Text('Fetch Book Info'),
+          ),
         ),
       ],
     );
@@ -126,10 +130,54 @@ class _AddScreenState extends State<AddScreen>  {
     if (book.isNotEmpty) {
       return Column(
         children: <Widget>[
-          Text('Title: ${book['title']}'),
-          Text('Author: ${book['author']}'),
-          Text('Price: ${book['price']}'),
-          Text('Series: ${book['series']}'),
+          Container(
+            margin: EdgeInsets.only(top: 20.0),
+            decoration: BoxDecoration(
+                border: Border(
+                    bottom: BorderSide()
+                )
+            ),
+            child: Text('Title', style: TextStyle(fontSize: 15),),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 5.0),
+            child: Text( book['title'], style:  TextStyle(fontSize: 20),),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 15.0),
+            decoration: BoxDecoration(
+                border: Border(
+                    bottom: BorderSide()
+                )
+            ),
+            child: Text('Author', style: TextStyle(fontSize: 15),),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 5.0),
+            child: Text( book['author'], style:  TextStyle(fontSize: 20),),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 15.0),
+            decoration: BoxDecoration(
+                border: Border(
+                    bottom: BorderSide()
+                )
+            ),
+            child: Text('Price', style: TextStyle(fontSize: 15),),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 5.0),
+            child: Text( book['price'], style:  TextStyle(fontSize: 20),),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 15.0,bottom: 15.0),
+            child: Text('Series: ${book['series']}', style:  TextStyle(fontSize: 15),),
+          ),
+
+          // Text('Title: ${book['title']}'),
+          // Text('Author: ${book['author']}'),
+          // Text('Price: ${book['price']}'),
+          // Text('Series: ${book['series']}'),
           ElevatedButton(
             onPressed: _addBookToDatabase,
             child: Text('Add to Database'),
@@ -155,7 +203,12 @@ class _AddScreenState extends State<AddScreen>  {
               if (_isLoading) CircularProgressIndicator(),
               _isbnInputField(),
               _actionButtons(),
-              if (_isbn.isNotEmpty) Text('Scanned ISBN: $_isbn'),
+              if (_isbn.isNotEmpty)
+                Container(
+                  margin: EdgeInsets.only(top: 5.0),
+                  child: Text( 'Scanned ISBN: $_isbn' , style:  TextStyle(fontSize: 15),),
+                ),
+                // Text('Scanned ISBN: $_isbn'),
               _bookInfo(),
             ]
           )
