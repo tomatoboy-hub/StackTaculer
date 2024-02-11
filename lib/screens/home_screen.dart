@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:stacktaculer/main1%20(2).dart';
 import 'detail_screen.dart';
 import 'add_screen.dart';
 import 'gyro_cube_screen.dart';
@@ -7,7 +6,7 @@ import 'package:stacktaculer/database_helper.dart';
 import '../book.dart';
 import '../common/Footer.dart';
 import './amount_screen.dart';
-import 'setting.dart';
+
 class HomeScreen extends StatefulWidget{
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -73,11 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 margin: const EdgeInsets.only(bottom: 10.0),
                 elevation: 8,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30)
+                    borderRadius: BorderRadius.circular(30)
                 ),
                 child: ListTile(
-                  title: Text(book.title,
-                  style: TextStyle(fontSize: MeApp.currentFontSize),),
+                  title: Text(book.title),
                   subtitle: Text(book.author),
                   onTap: () async {
                     // DetailScreenにBookオブジェクトを渡す
@@ -94,9 +92,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       setState(() {});
                     }
                   },
-                  tileColor: Color(0xFFf2f2f2),
+                  //tileColor: Color(0xFFf2f2f2),
                   trailing: IconButton(
-                    icon: Icon(Icons.delete,color: Color(0xFF401b13),),
+                    icon: Icon(Icons.delete),
                     onPressed: () async {
                       // データベースからアイテムを削除
                       await DatabaseHelper.instance.delete(book.id);
@@ -114,7 +112,6 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xFFbf7449),
         child: Icon(Icons.add,color: Color(0xFF401b13),),
         onPressed: () async {
           // 書籍追加画面から戻った後、リストを更新する
