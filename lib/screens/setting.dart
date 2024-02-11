@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../common/Footer.dart';
 import '../database_helper.dart';
-void main() {
+void main(){
   runApp(MeApp());
 }
 
@@ -17,6 +17,7 @@ class MeApp extends StatelessWidget {
         )
     ),
   );
+
   static double currentFontSize = 12.0;
   @override
   Widget build(BuildContext context) {
@@ -169,8 +170,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void setThemeMode(bool value) {
     if (value) {
       MeApp.setThemeData(ThemeData.dark());
+      MeApp().setThemeData(ThemeData.dark());
     } else {
       MeApp.setThemeData(ThemeData(
+        primarySwatch: Colors.blue,
+        appBarTheme: AppBarTheme(
+            iconTheme: IconThemeData(color: Color(0xFFf2f2f2)),
+            color: Color(0xFF4d5d73),
+            titleTextStyle: TextStyle(
+                color: Color(0xFFbdd9f2),
+                fontSize: 24
+            )
+        ),
+      ));
+      MeApp().setThemeData(ThemeData(
         primarySwatch: Colors.blue,
         appBarTheme: AppBarTheme(
             iconTheme: IconThemeData(color: Color(0xFFf2f2f2)),
@@ -191,6 +204,7 @@ extension ThemeExtension on MeApp {
       MaterialApp(
         title: 'Settings',
         theme: themeData,
+        darkTheme: ThemeData.dark(),
         home: SettingsScreen(),
       ),
     );
