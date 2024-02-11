@@ -217,7 +217,7 @@ class _AddScreenState extends State<AddScreen>  {
       floatingActionButton: FloatingActionButton(
         onPressed: _scanISBN,
         tooltip: 'Scan ISBN',
-        child: Icon(Icons.camera_alt),
+        child: Icon(Icons.camera_alt,color: Color(0xFF401b13),),
       ),
       bottomNavigationBar: Footer(),
     );
