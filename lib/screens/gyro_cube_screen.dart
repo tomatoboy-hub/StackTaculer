@@ -97,7 +97,10 @@ class _GyroCubeScreenState extends State<GyroCubeScreen> {
       _scene.world.add(bookObject);
       _bookObjects.add(bookObject);
     }
-
+    var earthObject = Object(fileName: 'assets/earth.obj');
+    earthObject.position.setValues(0, 0, 0);
+    earthObject.scale.setValues(2, 2, 2);
+    _scene.world.add(earthObject);
 
     gyroscopeEventsSubscription = gyroscopeEvents.listen((GyroscopeEvent event) {
       if (!mounted) return;
