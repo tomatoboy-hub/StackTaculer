@@ -22,7 +22,17 @@ class MeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Settings',
-      theme: ThemeData.light(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        appBarTheme: AppBarTheme(
+            iconTheme: IconThemeData(color: Color(0xFFf2f2f2)),
+            color: Color(0xFF4d5d73),
+            titleTextStyle: TextStyle(
+                color: Color(0xFFbdd9f2),
+                fontSize: 24
+            )
+        ),
+      ),
       darkTheme: ThemeData.dark(),
       home: SettingsScreen(),
     );
@@ -55,6 +65,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       default:
         return 12.0; // デフォルトのフォントサイズ
     }
+  }
+  void setFontSize() {
+    double fontSize = getFontSize(selectedOption);
+    MeApp.setFontSize(fontSize);
   }
   @override
   Widget build(BuildContext context) {
