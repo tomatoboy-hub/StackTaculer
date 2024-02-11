@@ -170,6 +170,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (value) {
       MeApp.setThemeData(ThemeData.dark());
     } else {
+
       MeApp.setThemeData(ThemeData(
         primarySwatch: Colors.blue,
         appBarTheme: AppBarTheme(
