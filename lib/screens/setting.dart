@@ -2,10 +2,22 @@ import 'package:flutter/material.dart';
 import '../common/Footer.dart';
 import '../database_helper.dart';
 void main() {
-  runApp(MyApp());
+  runApp(MeApp());
 }
 
-class MyApp extends StatelessWidget {
+class MeApp extends StatelessWidget {
+  static ThemeData currentTheme = ThemeData(
+    primarySwatch: Colors.blue,
+    appBarTheme: AppBarTheme(
+        iconTheme: IconThemeData(color: Color(0xFFf2f2f2)),
+        color: Color(0xFF4d5d73),
+        titleTextStyle: TextStyle(
+            color: Color(0xFFbdd9f2),
+            fontSize: 24
+        )
+    ),
+  );
+  static double currentFontSize = 12.0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,6 +26,13 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark(),
       home: SettingsScreen(),
     );
+  }
+  static setThemeData(ThemeData themeData) {
+    currentTheme = themeData;
+  }
+
+  static setFontSize(double fontSize) {
+    currentFontSize = fontSize;
   }
 }
 
@@ -134,18 +153,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   void setThemeMode(bool value) {
-    // ダークモードの切り替えロジック
     if (value) {
-      // ダークモードを有効にする
-      MyApp().setThemeData(ThemeData.dark());
+      MeApp.setThemeData(ThemeData.dark());
     } else {
-      // ダークモードを無効にする
-      MyApp().setThemeData(ThemeData.light());
+      MeApp.setThemeData(ThemeData(
+        primarySwatch: Colors.blue,
+        appBarTheme: AppBarTheme(
+            iconTheme: IconThemeData(color: Color(0xFFf2f2f2)),
+            color: Color(0xFF4d5d73),
+            titleTextStyle: TextStyle(
+                color: Color(0xFFbdd9f2),
+                fontSize: 24
+            )
+        ),
+      ));
     }
   }
 }
 
-extension ThemeExtension on MyApp {
+extension ThemeExtension on MeApp {
   setThemeData(ThemeData themeData) {
     runApp(
       MaterialApp(

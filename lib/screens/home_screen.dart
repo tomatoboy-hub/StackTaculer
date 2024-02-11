@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stacktaculer/main1%20(2).dart';
 import 'detail_screen.dart';
 import 'add_screen.dart';
 import 'gyro_cube_screen.dart';
@@ -6,7 +7,7 @@ import 'package:stacktaculer/database_helper.dart';
 import '../book.dart';
 import '../common/Footer.dart';
 import './amount_screen.dart';
-
+import 'setting.dart';
 class HomeScreen extends StatefulWidget{
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -75,7 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(30)
                 ),
                 child: ListTile(
-                  title: Text(book.title),
+                  title: Text(book.title,
+                  style: TextStyle(fontSize: MeApp.currentFontSize),),
                   subtitle: Text(book.author),
                   onTap: () async {
                     // DetailScreenにBookオブジェクトを渡す

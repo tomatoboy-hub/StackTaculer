@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
-
+import 'screens/setting.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 void main() async{
@@ -25,17 +25,7 @@ class StacktacularApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'StackTaculer',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        appBarTheme: AppBarTheme(
-            iconTheme: IconThemeData(color: Color(0xFFf2f2f2)),
-          color: Color(0xFF4d5d73),
-          titleTextStyle: TextStyle(
-            color: Color(0xFFbdd9f2),
-            fontSize: 24
-          )
-        ),
-      ),
+      theme: MeApp.currentTheme,
       home: HomeScreen(),
     );
   }
